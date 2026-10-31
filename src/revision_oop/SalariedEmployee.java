@@ -24,19 +24,30 @@ public class SalariedEmployee extends Employee implements Displayable {
     }
 
     @Override
-    public double earning() {
-        return (Salary + Bonus -deduction );
+    public String toString() {
+        return "SalariedEmployee{" +
+                "Salary=" + Salary +
+                ", Bonus=" + Bonus +
+                ", deduction=" + deduction +
+                '}';
     }
 
 
     public void DisplayAllDetails() {
 
-        
+        System.out.println(super.toString());
+        System.out.println(toString());
+
+    }
+
+    @Override
+    public double earning() {
+        return (Salary + Bonus -deduction );
     }
 
 
     public void DisplayEarnings() {
-
+        System.out.println(earning());
     }
 
 
