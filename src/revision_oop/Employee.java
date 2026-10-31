@@ -1,0 +1,68 @@
+package revision_oop;
+
+
+enum Gender {Male, Female}
+
+public abstract class Employee {
+
+    String name;
+    String address;
+    int ssn;
+    Gender sex;
+
+
+    public Employee() {}
+
+    public Employee(String address, String name, int ssn, Gender sex) {
+        this.address = address;
+        this.name = name;
+        this.ssn = ssn;
+        this.sex = sex;
+    }
+
+    public abstract double earning ();
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", ssn=" + ssn +
+                ", sex=" + sex +
+                '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+
+
+    public int getSsn() {
+        return ssn;
+    }
+
+    public void setSsn(int ssn) {
+        this.ssn = ssn;
+    }
+
+    public Gender getSex() {
+        return sex;
+    }
+
+    public void setSex(Gender sex) {
+        this.sex = sex;
+    }
+}
