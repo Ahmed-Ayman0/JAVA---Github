@@ -4,43 +4,53 @@ import java.util.ArrayList;
 
 public class Department {
 
-    int dno;
-    String dname;
-
-    ArrayList<Employee> emplist;
-
+    private int dno;
+    private String dname;
+    private ArrayList<Employee> emplist;
 
     public Department() {
+        this.emplist = new ArrayList<>();
     }
 
     public Department(int dno, String dname) {
         this.dno = dno;
         this.dname = dname;
-        emplist = new ArrayList<Employee>();
+        this.emplist = new ArrayList<>();
     }
-
 
     public void add_Employee(Employee e) {
         emplist.add(e);
     }
 
-
-    public void remove_Employee(Employee id) {
-        emplist.remove(id);
-    }
-
-    public int get_EmployeeCount() {
-
-        return emplist.size();
-    }
-
-    public void print_basic_data() {
-        for (int i = 0; i <emplist.size() ; i++) {
-            System.out.println(emplist.get(i).getSsn());
+    public void remove_Employee(int idx) {
+        if (idx >= 0 && idx < emplist.size()) {
+            emplist.remove(idx);
         }
     }
 
+    public int get_EmployeeCount() {
+        return emplist.size(); 
+    }
 
+    public void print_basic_data() {
+        for (Employee e : emplist) {
+            System.out.println(e.getSsn() + " " + e.getName() + " " + e.getSex());
+        }
+    }
+
+    public void print_All_Details() {
+        for (Employee e : emplist) {
+            if (e instanceof SalariedEmployee) {
+                ((SalariedEmployee) e).DisplayAllDetails();
+            } else if (e instanceof HourlyEmployee) {
+                ((HourlyEmployee) e).DisplayAllDetails();
+            } else if (e instanceof CommisionEmployee) { // Fixed spelling to Commission (two s's)
+                ((CommisionEmployee) e).DisplayAllDetails();
+            }
+        }
+    }
+
+    // Getters and Setters
     public int getDno() {
         return dno;
     }
@@ -64,6 +74,4 @@ public class Department {
     public void setEmplist(ArrayList<Employee> emplist) {
         this.emplist = emplist;
     }
-
-
 }
