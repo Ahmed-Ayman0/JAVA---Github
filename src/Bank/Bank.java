@@ -2,26 +2,23 @@ package Bank;
 
 public class Bank {
 
-    private String accountNumber;
+    private  String accountNumber;//    should be final
     private String ownerName;
     private double balance;
 
 
-    public Bank() {
-    }
+    public Bank() {}
 
     public Bank(String accountNumber, String ownerName, double balance) {
 
         if (balance < 0) {
             throw new IllegalArgumentException("Invalid balance");
-        } else if (balance > 0) {
-            System.out.println("Balance is " + balance);
         }
 
-        if (accountNumber == null) {
+        if (accountNumber == null || accountNumber.isBlank()) {
             throw new IllegalArgumentException("Account number cannot be null or empty");
         }
-        if (ownerName == null) {
+        if (ownerName == null ||ownerName.trim().isBlank() ) {
             throw new IllegalArgumentException("Owner name cannot be null or empty");
         }
         this.accountNumber = accountNumber;
@@ -31,9 +28,9 @@ public class Bank {
 
     public void deposit(double amount) {
         if (amount <= 0) {
-            System.out.println("Invalid Amount");
+            throw new IllegalArgumentException(" Amount must be positive ");
         } else
-            balance = balance + amount;
+            balance += amount;
     }
 
 
@@ -43,7 +40,7 @@ public class Bank {
         } else if (amount > balance) {
             System.out.println("insufficient Balance");
         } else
-            balance = balance - amount;
+            balance -= amount;
 
     }
 
@@ -70,6 +67,9 @@ public class Bank {
     }
 
     public void setOwnerName(String ownerName) {
+        if (ownerName==null || ownerName.isBlank()) {
+            throw new IllegalArgumentException("Owner name cannot be null or empty");
+        }
         this.ownerName = ownerName;
     }
 
