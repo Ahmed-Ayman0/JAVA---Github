@@ -2,23 +2,31 @@ package Bank;
 
 public class Bank {
 
-    private  String accountNumber;//    should be final
+    private final String accountNumber;//    should be final
     private String ownerName;
     private double balance;
+    private static int totalAccounts;
 
 
-    public Bank() {}
 
+    //Constructor 1:
+    public Bank(String accountNumber, String ownerName) {
+        this(accountNumber, ownerName, 0);
+        totalAccounts++;
+    }
+
+
+    //Constructor 2:
     public Bank(String accountNumber, String ownerName, double balance) {
 
-        if (balance < 0) {
+        if (!Double.isFinite(balance) || balance < 0) {
             throw new IllegalArgumentException("Invalid balance");
         }
 
         if (accountNumber == null || accountNumber.isBlank()) {
             throw new IllegalArgumentException("Account number cannot be null or empty");
         }
-        if (ownerName == null ||ownerName.trim().isBlank() ) {
+        if (ownerName == null || ownerName.isBlank()) {
             throw new IllegalArgumentException("Owner name cannot be null or empty");
         }
         this.accountNumber = accountNumber;
@@ -27,20 +35,51 @@ public class Bank {
     }
 
     public void deposit(double amount) {
-        if (amount <= 0) {
+        if (!Double.isFinite(amount) || amount <= 0) {
             throw new IllegalArgumentException(" Amount must be positive ");
-        } else
-            balance += amount;
+        }
+        balance += amount;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Bank{" +
+                "accountNumber='" + accountNumber + '\'' +
+                ", ownerName='" + ownerName + '\'' +
+                ", balance=" + balance +
+                '}';
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Bank other = (Bank) obj;
+
+        return accountNumber.equals(other.accountNumber)
+                && ownerName.equals(other.ownerName)
+                && Double.compare(balance, other.balance) == 0;
     }
 
 
     public void withdraw(double amount) {
-        if (amount <= 0) {
-            System.out.println("Invalid Amount");
-        } else if (amount > balance) {
-            System.out.println("insufficient Balance");
-        } else
-            balance -= amount;
+        if (!Double.isFinite(amount) || amount <= 0) {
+            throw new IllegalArgumentException(" Amount must be positive ");
+        }
+        if (amount > balance) {
+            throw new IllegalStateException("Insufficient balance");
+        }
+
+        balance -= amount;
 
     }
 
@@ -58,16 +97,13 @@ public class Bank {
         return accountNumber;
     }
 
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
 
     public String getOwnerName() {
         return ownerName;
     }
 
     public void setOwnerName(String ownerName) {
-        if (ownerName==null || ownerName.isBlank()) {
+        if (ownerName == null || ownerName.isBlank()) {
             throw new IllegalArgumentException("Owner name cannot be null or empty");
         }
         this.ownerName = ownerName;
@@ -77,7 +113,9 @@ public class Bank {
         return balance;
     }
 
-
+    public static int getTotalAccounts() {
+        return totalAccounts;
+    }
 }
 
 

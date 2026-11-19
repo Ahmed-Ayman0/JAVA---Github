@@ -5,12 +5,15 @@ public class Main {
 
     public static void main() {
 
-        Student s1 = new Student(123,"Ahmed",2002);
+
+        Bank account1 = new Bank("1001", "Ahmed", 500);
+        Bank account2 = new Bank("1001", "Ahmed", 5030);
+
+         System.out.println(account1.equals(account2));
 
 
-//        Bank b1 = new Bank("101", "Ahmed", 1000);
-//        System.out.println("b1 created");
-//
+
+
 //        Bank b2 = new Bank("102", "Ali", -10);
 //        System.out.println("b2 created");
 //

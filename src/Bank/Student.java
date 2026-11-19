@@ -1,20 +1,33 @@
 package Bank;
 
-public class Student {
+final public class Student {
 
-    final int  student_id ;
+    final int student_id;
     String name;
     int YearOfBirth;
+    final static float degree_of_success;
+
+    static {
+        degree_of_success = 50;
+    }
 
 
 
-    public Student(int student_id, String name, int yearOfBirth) {
+    public Student(final int student_id, String name, int yearOfBirth) {
+
+//        System.out.println("Student Constructor");
         this.student_id = student_id;
         this.name = name;
         this.YearOfBirth = yearOfBirth;
     }
 
-//    public void Student_id(int student_id) {
-//        this.student_id = student_id;
-//    }
+
+
+    @Override
+    final public String toString() {
+        return "Student{" + "student_id=" + student_id + ", name='" + name + '\'' + ", YearOfBirth=" + YearOfBirth + '}';
+    }
+
+
+
 }
