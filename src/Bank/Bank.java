@@ -1,18 +1,20 @@
 package Bank;
-
+import java.util.ArrayList;
+import java.util.Objects;
 public class Bank {
 
     private final String accountNumber;//    should be final
     private String ownerName;
     private double balance;
-    private static int totalAccounts;
+    private static int totalAccounts=0;
 
 
+    private static ArrayList<Bank> accounts = new ArrayList<>();
 
     //Constructor 1:
     public Bank(String accountNumber, String ownerName) {
         this(accountNumber, ownerName, 0);
-        totalAccounts++;
+
     }
 
 
@@ -32,7 +34,35 @@ public class Bank {
         this.accountNumber = accountNumber;
         this.ownerName = ownerName;
         this.balance = balance;
+        accounts.add(this);
+        totalAccounts++;
     }
+
+    public static boolean DeleteAccount(String accountNumber) {
+
+        for (int i = 0; i < accounts.size(); i++) {
+
+            Bank account = accounts.get(i);
+
+            if (account.getAccountNumber().equals(accountNumber)) {
+
+                if (account.getBalance() > 0) {
+                    System.out.println("Cannot delete account. Balance is not zero.");
+                    return false;
+                }
+
+                accounts.remove(i);
+                totalAccounts--;
+
+                System.out.println("Account deleted successfully.");
+                return true;
+            }
+        }
+
+        System.out.println("Account not found.");
+        return false;
+    }
+
 
     public void deposit(double amount) {
         if (!Double.isFinite(amount) || amount <= 0) {
@@ -42,15 +72,6 @@ public class Bank {
     }
 
 
-    @Override
-    public String toString() {
-        return "Bank{" +
-                "accountNumber='" + accountNumber + '\'' +
-                ", ownerName='" + ownerName + '\'' +
-                ", balance=" + balance +
-                '}';
-    }
-
 
     @Override
     public boolean equals(Object obj) {
@@ -59,17 +80,21 @@ public class Bank {
             return true;
         }
 
-        if (obj == null || getClass() != obj.getClass()) {
+        if (obj == null || this.getClass() != obj.getClass()) {
             return false;
         }
 
         Bank other = (Bank) obj;
 
-        return accountNumber.equals(other.accountNumber)
-                && ownerName.equals(other.ownerName)
-                && Double.compare(balance, other.balance) == 0;
+        return this.accountNumber.equals(other.accountNumber)
+                && this.ownerName.equals(other.ownerName)
+                && Double.compare(this.balance, other.balance) == 0;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(accountNumber, ownerName, balance);
+    }
 
     public void withdraw(double amount) {
         if (!Double.isFinite(amount) || amount <= 0) {
@@ -83,7 +108,6 @@ public class Bank {
 
     }
 
-
     public String displayAccountInfo() {
         return "Bank{" +
                 "accountNumber='" + accountNumber + '\'' +
@@ -92,6 +116,20 @@ public class Bank {
                 '}';
     }
 
+
+    public static void DisplayAllAccounts() {
+
+        if (accounts.isEmpty()) {
+            System.out.println("No accounts available");
+            return;
+        }
+
+        for (int i = 0; i < accounts.size(); i++) {
+
+            System.out.println(accounts.get(i).displayAccountInfo());
+
+        }
+    }
 
     public String getAccountNumber() {
         return accountNumber;

@@ -1,31 +1,38 @@
+
 package Bank;
 
 public class Main {
 
-
-    public static void main() {
-
-
-        Bank account1 = new Bank("1001", "Ahmed", 500);
-        Bank account2 = new Bank("1001", "Ahmed", 5030);
-
-         System.out.println(account1.equals(account2));
+    public static void main(String[] args) {
 
 
+        Bank acc1 = new Bank("1001", "Ahmed", 5000);
 
+        Bank.DisplayAllAccounts();
 
-//        Bank b2 = new Bank("102", "Ali", -10);
-//        System.out.println("b2 created");
 //
-//        Bank b3 = new Bank("103", "Omar", -500);
-//        System.out.println("b3 created");
 //
-//        System.out.println("Program finished");
-
-
+//        // Create 3 accounts
+//        Bank acc1 = new Bank("1001", "Ahmed", 5000);
+//        Bank acc2 = new Bank("1002", "Mohamed", 0);
+//        Bank acc3 = new Bank("1003", "Ali", 1000);
+//
+//        // Check total accounts
+//        System.out.println("Total accounts: " + Bank.getTotalAccounts());
+//
+//        // Test 1: Delete account with zero balance
+//        System.out.println("\nTest 1:");
+//        Bank.DeleteAccount("1002");
+//
+//        // Test 2: Delete account with money
+//        System.out.println("\nTest 2:");
+//        Bank.DeleteAccount("1001");
+//
+//        // Test 3: Delete account that doesn't exist
+//        System.out.println("\nTest 3:");
+//        Bank.DeleteAccount("9999");
+//
+//        // Final result
+//        System.out.println("\nFinal total accounts: " + Bank.getTotalAccounts());
     }
-
 }
-
-
-
