@@ -6,9 +6,23 @@ public class Main {
     public static void main(String[] args) {
 
 
-        Bank acc1 = new Bank("1001", "Ahmed", 5000);
+        for (int i = 1; i <= 5; i++) {
 
-        Bank.DisplayAllAccounts();
+            for (int s = 0; s < 5 - i; s++) {
+                System.out.print(" ");
+
+            }
+            for (int k = 0; k < 2 * i - 1; k++) {
+                System.out.print("*");
+
+            }
+            System.out.println("");
+        }
+
+//
+//        Bank acc1 = new Bank("1001", "Ahmed", 5000);
+//
+//        Bank.DisplayAllAccounts();
 
 //
 //
