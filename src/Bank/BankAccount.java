@@ -1,25 +1,30 @@
 package Bank;
+
 import java.util.ArrayList;
 import java.util.Objects;
-public class Bank {
+
+public class BankAccount {
 
     private final String accountNumber;//    should be final
     private String ownerName;
     private double balance;
-    private static int totalAccounts=0;
+    private static int totalAccounts = 0;
 
 
-    private static ArrayList<Bank> accounts = new ArrayList<>();
+    private static ArrayList<BankAccount> accounts = new ArrayList<>();
 
-    //Constructor 1:
-    public Bank(String accountNumber, String ownerName) {
+
+
+
+        //Constructor 1:
+    public BankAccount(String accountNumber, String ownerName) {
         this(accountNumber, ownerName, 0);
 
     }
 
 
     //Constructor 2:
-    public Bank(String accountNumber, String ownerName, double balance) {
+    public BankAccount(String accountNumber, String ownerName, double balance) {
 
         if (!Double.isFinite(balance) || balance < 0) {
             throw new IllegalArgumentException("Invalid balance");
@@ -42,7 +47,7 @@ public class Bank {
 
         for (int i = 0; i < accounts.size(); i++) {
 
-            Bank account = accounts.get(i);
+            BankAccount account = accounts.get(i);
 
             if (account.getAccountNumber().equals(accountNumber)) {
 
@@ -72,7 +77,6 @@ public class Bank {
     }
 
 
-
     @Override
     public boolean equals(Object obj) {
 
@@ -84,7 +88,7 @@ public class Bank {
             return false;
         }
 
-        Bank other = (Bank) obj;
+        BankAccount other = (BankAccount) obj;
 
         return this.accountNumber.equals(other.accountNumber)
                 && this.ownerName.equals(other.ownerName)
